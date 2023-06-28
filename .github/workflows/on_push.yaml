@@ -1,0 +1,14 @@
+name: Push
+
+on:
+  push:
+
+jobs:
+
+  build:
+    uses: ./.github/workflows/build.yaml
+
+  publish:
+    if: github.ref_name == 'main'
+    needs: build
+    uses: ./.github/workflows/publish.yaml
