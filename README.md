@@ -1,6 +1,6 @@
 # SD-Core GUI ROCK
 
-A graphical user interface for SD-Core.
+Container image for SD-Core GUI.
 
 ## Usage
 

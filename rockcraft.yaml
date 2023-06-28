@@ -4,7 +4,7 @@ build-base: ubuntu:22.04
 version: "0.1"
 summary: SD-Core GUI
 description: |
-  SD-Core Graphical User Interface OCI Image.
+  A graphical user interface for SD-Core.
 license: Apache-2.0
 platforms:
   amd64:
