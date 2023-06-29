@@ -16,13 +16,16 @@ services:
     startup: enabled
 
 parts:
+  install-node:  # FIXME: Node should be installed using `stage-snap`. Bug: https://github.com/canonical/rockcraft/issues/307
+    plugin: nil
+    override-build: |
+      curl -s "https://nodejs.org/dist/v18.16.1/node-v18.16.1-linux-x64.tar.gz" | tar --strip-components=1 -xzf - -C "${CRAFT_PART_INSTALL}"
+
   frontend:
     plugin: npm
     source: https://github.com/canonical/sdcore-gui.git
-    source-tag: 5aab82fe519ba73539bd492596d0de7b1f42f3c3
+    source-tag: v0.0.1
     build-snaps:
-    - node/18/stable
-    stage-snaps:
     - node/18/stable
     override-build: |
       npm ci
