@@ -12,7 +12,7 @@ platforms:
 services:
   sdcore-gui:
     override: replace
-    command: node client/.next/standalone/server.js
+    command: node client/standalone/server.js
     startup: enabled
 
 parts:
@@ -30,7 +30,6 @@ parts:
     override-build: |
       npm ci
       npm run build
-      mkdir -p ${CRAFT_PART_INSTALL}/client
-      cp -r .next ${CRAFT_PART_INSTALL}/client
-      cp -r .next/static ${CRAFT_PART_INSTALL}/client/.next/standalone/.next/
-      cp -r public ${CRAFT_PART_INSTALL}/client
+      mkdir -p ${CRAFT_PART_INSTALL}/client/.next/standalone/.next
+      cp -r .next/standalone ${CRAFT_PART_INSTALL}/client
+      cp -r .next/static ${CRAFT_PART_INSTALL}/client/standalone/.next/static
