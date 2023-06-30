@@ -5,10 +5,10 @@ on:
 
 jobs:
 
-  build:
-    uses: ./.github/workflows/build.yaml
+  integration-tests:
+    uses: ./.github/workflows/integration_tests.yaml
 
   publish:
     if: github.ref_name == 'main'
-    needs: build
+    needs: integration-tests
     uses: ./.github/workflows/publish.yaml

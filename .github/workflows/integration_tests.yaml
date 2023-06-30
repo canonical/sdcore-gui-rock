@@ -1,10 +1,10 @@
-name: Build
+name: Integration tests
 
 on:
   workflow_call:
 
 jobs:
-  build:
+  integration-tests:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
