@@ -1,0 +1,34 @@
+name: sdcore-gui
+base: ubuntu:22.04
+version: "0.1"
+summary: SD-Core GUI
+description: |
+  A graphical user interface for SD-Core.
+license: Apache-2.0
+platforms:
+  amd64:
+
+services:
+  sdcore-gui:
+    override: replace
+    command: node client/standalone/server.js
+    startup: enabled
+
+parts:
+  node:  # FIXME: Node should be installed using `stage-snap`. Bug: https://github.com/canonical/rockcraft/issues/307
+    plugin: nil
+    override-build: |
+      curl -s "https://nodejs.org/dist/v18.16.1/node-v18.16.1-linux-x64.tar.gz" | tar --strip-components=1 -xzf - -C "${CRAFT_PART_INSTALL}"
+
+  frontend:
+    plugin: nil
+    source: https://github.com/canonical/sdcore-gui.git
+    source-tag: v0.0.1
+    build-snaps:
+    - node/18/stable
+    override-build: |
+      npm ci
+      npm run build
+      mkdir -p ${CRAFT_PART_INSTALL}/client/.next/standalone/.next
+      cp -r .next/standalone ${CRAFT_PART_INSTALL}/client
+      cp -r .next/static ${CRAFT_PART_INSTALL}/client/standalone/.next/static
